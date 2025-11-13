@@ -1,0 +1,221 @@
+
+@import "tailwindcss";
+@import "./theme/tokens.css";
+
+@layer base {
+  :root {
+    --color-bg: 255 255 255;
+    --color-fg: 15 23 42;
+    --color-primary: 59 130 246;
+    --color-border: 226 232 240;
+    --color-muted: 248 250 252;
+  }
+
+  .dark {
+    --color-bg: 15 23 42;
+    --color-fg: 248 250 252;
+    --color-primary: 96 165 250;
+    --color-border: 51 65 85;
+    --color-muted: 30 41 59;
+
+    color-scheme: dark;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background-color: white;
+    color: #1f2937;
+  }
+
+  .dark body {
+    background-color: #1e293b; 
+    color: #f8fafc; 
+  }
+}
+
+@layer components {
+  .page {
+    min-height: 100vh;
+    padding: 1.5rem 0;
+  }
+
+  .card {
+    background-color: white;
+    border: 1px solid #e2e8f0; 
+    border-radius: 1rem;
+  }
+
+  .dark .card {
+    background-color: #2d3748; 
+    border-color: #4a5568; 
+  }
+
+  .muted {
+    color: #64748b; 
+  }
+
+  .dark .muted {
+    color: #94a3b8; /* Slate 400 */
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    background-color: #3b82f6; /* Blue 600 */
+    color: white;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn:hover {
+    background-color: #2563eb; /* Blue 700 */
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .dark .btn {
+    background-color: #3b82f6; /* Blue 500 */
+  }
+
+  .dark .btn:hover {
+    background-color: #2563eb; /* Blue 600 */
+  }
+
+  .btn-danger {
+    background-color: #dc2626; /* Rose 600 */
+  }
+
+  .btn-danger:hover {
+    background-color: #b91c1c; /* Rose 700 */
+  }
+
+  .app-shell {
+    min-height: 100%;
+    background-color: #f1f5f9; /* Slate 50 */
+  }
+
+  .dark .app-shell {
+    background-color: #1e293b; /* Slate 900 */
+  }
+
+  .app-header {
+    background-color: white;
+    border-bottom: 1px solid #e2e8f0; /* Slate 200 */
+  }
+
+  .dark .app-header {
+    background-color: #2d3748; /* Slate 800 */
+    border-color: #4a5568; /* Slate 700 */
+  }
+
+  .btn-ghost {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    background-color: #f1f5f9; /* Slate 100 */
+  }
+
+  .dark .btn-ghost:hover {
+    background-color: #4a5568; /* Slate 700 */
+  }
+
+  .input {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #cbd5e1; /* Slate 300 */
+    background-color: white;
+    color: #1f2937; /* Slate 900 */
+    outline: none;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .input::placeholder {
+    color: #94a3b8; /* Slate 400 */
+  }
+
+  .input:focus {
+    box-shadow: 0 0 0 2px #3b82f6; /* Blue 500 */
+    border-color: transparent;
+  }
+
+  .dark .input {
+    background-color: #2d3748; /* Slate 800 */
+    border-color: #4a5568; /* Slate 600 */
+    color: #f8fafc; /* Slate 50 */
+  }
+
+  /* Make native selects follow dark appearance on supporting browsers */
+  .dark select.input {
+    background-color: #2d3748; /* Slate 800 - keep card input bg */
+    color: #f8fafc; /* Slate 50 */
+    border-color: #4a5568;
+    /* Prefer a lighter native dropdown on some platforms to avoid pure-black lists
+       (many UAs will still style option lists; this nudges browsers that honor
+       color-scheme to present lighter popups). */
+    color-scheme: light;
+  }
+
+  /* Try to influence option list appearance where supported. Not all browsers
+     allow styling native option dropdowns, but this helps in ones that do. */
+  .dark select.input option {
+    background-color: #2d3748; /* keep options matching input */
+    color: #f8fafc;
+  }
+
+  .dark .input::placeholder {
+    color: #64748b; /* Slate 500 */
+  }
+
+  .dark .input:focus {
+    box-shadow: 0 0 0 2px #60a5fa; /* Blue 400 */
+    border-color: transparent;
+  }
+
+  .sidebar {
+    background-color: white;
+    border-right: 1px solid #e2e8f0; /* Slate 200 */
+  }
+
+  .dark .sidebar {
+    background-color: #2d3748; /* Slate 800 */
+    border-color: #4a5568; /* Slate 700 */
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    background-color: #f1f5f9; /* Slate 100 */
+  }
+
+  .dark .nav-link:hover {
+    background-color: #4a5568; /* Slate 700 */
+  }
+
+  .nav-link-active {
+    background-color: #e0f2fe; /* Blue 50 */
+    color: #3b82f6; /* Blue 600 */
+  }
+
+  .dark .nav-link-active {
+    background-color: rgba(30, 41, 59, 0.2); /* Blue 900 with opacity */
+    color: #60a5fa; /* Blue 400 */
+  }
+}
