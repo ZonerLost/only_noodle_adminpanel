@@ -15,9 +15,9 @@ export default function UserMenu() {
         <div className="absolute right-0 mt-2 w-48 card p-2 shadow">
           <button
             className="btn-ghost w-full justify-start"
-            onClick={() => nav(PATHS.settingsBrand)}
+            onClick={() => nav(PATHS.settingsProfile)}
           >
-            Settings
+            Profile
           </button>
           <button
             className="btn-ghost w-full justify-start"

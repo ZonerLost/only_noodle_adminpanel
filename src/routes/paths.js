@@ -12,5 +12,6 @@ export const PATHS = {
   products: "/catalog/products",
   categories: "/catalog/categories",
   reviews: "/reviews",
-  settingsBrand: "/settings/branding",
+  // settingsBrand removed
+  settingsProfile: "/settings/profile",
 };

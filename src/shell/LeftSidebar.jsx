@@ -21,7 +21,7 @@ const NAV = [
   { label: "Zones", to: PATHS.zones, icon: MapPin },
   { label: "Products", to: PATHS.products, icon: Tag },
   { label: "Reviews", to: PATHS.reviews, icon: Star },
-  { label: "Branding", to: PATHS.settingsBrand, icon: Settings },
+  { label: "Profile", to: PATHS.settingsProfile, icon: Settings },
 ];
 
 export default function LeftSidebar() {

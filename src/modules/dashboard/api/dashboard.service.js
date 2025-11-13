@@ -19,14 +19,6 @@ function genSeries(days = 14, base = 100, noise = 0.25) {
   return out;
 }
 
-function genZones() {
-  const zones = ["North", "East", "Central", "West", "South"];
-  return zones.map((z) => ({
-    zone: z,
-    orders: Math.floor(Math.random() * 120 + 20),
-  }));
-}
-
 export async function fetchKpis({ range = "7d" } = {}) {
   await wait(300);
   const multiplier = range === "30d" ? 4 : 1;
@@ -51,14 +43,7 @@ export async function fetchRevenueSeries({ range = "7d" } = {}) {
   return genSeries(days, 2500, 0.28);
 }
 
-export async function fetchZoneHeat(options = {}) {
-  await wait(220);
-  const zones = genZones();
-  if (options && typeof options.count === "number") {
-    return zones.slice(0, options.count);
-  }
-  return zones;
-}
+// zone-heat utilities removed
 
 // ---------- Widgets CRUD (localStorage) ----------
 function readWidgets() {
@@ -66,7 +51,10 @@ function readWidgets() {
     const raw = localStorage.getItem(LS_KEY);
     if (!raw) return defaultWidgets();
     const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : defaultWidgets();
+    // filter out any widgets of the removed "zones" type so existing localStorage
+    // won't continue to surface the deprecated widget
+    if (Array.isArray(arr)) return arr.filter((w) => w.type !== "zones");
+    return defaultWidgets();
   } catch {
     return defaultWidgets();
   }
@@ -78,7 +66,6 @@ function defaultWidgets() {
   return [
     { id: "w-orders", type: "orders", title: "Orders Spark", span: 1 },
     { id: "w-revenue", type: "revenue", title: "Revenue Spark", span: 1 },
-    { id: "w-zones", type: "zones", title: "Zone Heat (mini)", span: 2 },
   ];
 }
 

@@ -14,7 +14,7 @@ import { OrdersBoard, OrdersHistory } from "../modules/orders-ops";
 import { ZonesEditor, Fees, ZoneRules } from "../modules/zones-fees";
 import { CategoriesList, ProductsList } from "../modules/menu-catalog";
 import ReviewsList from "../modules/reviews-feedback/reviews/List.jsx";
-import Branding from "../modules/system-settings/branding/Branding.jsx";
+import Profile from "../modules/system-settings/profile/Profile.jsx";
 
 function ShellLayout() {
   return (
@@ -78,7 +78,7 @@ export default function Router() {
         <Route path={PATHS.reviews} element={<ReviewsList />} />
 
         {/* Settings */}
-        <Route path={PATHS.settingsBrand} element={<Branding />} />
+        <Route path={PATHS.settingsProfile} element={<Profile />} />
 
         {/* Fallbacks */}
         <Route path="/" element={<Navigate to={PATHS.dashboard} replace />} />
@@ -87,4 +87,3 @@ export default function Router() {
     </Routes>
   );
 }
-

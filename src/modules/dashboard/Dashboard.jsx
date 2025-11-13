@@ -1,12 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import OrdersSpark from "./components/OrdersSpark.jsx";
 import RevenueSpark from "./components/RevenueSpark.jsx";
-import ZoneHeatMini from "./components/ZoneHeatMini.jsx";
 import {
   fetchKpis,
   fetchOrdersSeries,
   fetchRevenueSeries,
-  fetchZoneHeat,
   listWidgets,
   createWidget,
   updateWidget,
@@ -23,7 +21,6 @@ export default function Dashboard() {
   const [kpis, setKpis] = useState(null);
   const [orders, setOrders] = useState([]);
   const [revenue, setRevenue] = useState([]);
-  const [zones, setZones] = useState([]);
   const [busy, setBusy] = useState(false);
 
   const [widgets, setWidgets] = useState([]);
@@ -32,16 +29,14 @@ export default function Dashboard() {
 
   const load = React.useCallback(async () => {
     setBusy(true);
-    const [k, o, r, z] = await Promise.all([
+    const [k, o, r] = await Promise.all([
       fetchKpis({ range }),
       fetchOrdersSeries({ range }),
       fetchRevenueSeries({ range }),
-      fetchZoneHeat({ range }),
     ]);
     setKpis(k);
     setOrders(o);
     setRevenue(r);
-    setZones(z);
     const ws = await listWidgets();
     setWidgets(ws);
     setBusy(false);
@@ -131,20 +126,7 @@ export default function Dashboard() {
         </div>
       );
     }
-    if (w.type === "zones") {
-      return (
-        <div key={w.id} className={spanCls}>
-          <ZoneHeatMini data={zones} label={w.title || "Zone Heat"} />
-          <TileActions
-            onEdit={() => {
-              setEditing(w);
-              setManageOpen(true);
-            }}
-            onDelete={() => onDeleteWidget(w.id)}
-          />
-        </div>
-      );
-    }
+    // no zones widget: removed per request
     return (
       <div key={w.id} className={spanCls}>
         <div className="card p-4">
@@ -191,15 +173,7 @@ export default function Dashboard() {
             <button className="btn" onClick={load} disabled={busy}>
               {busy ? "Refreshing…" : "Refresh"}
             </button>
-            <button
-              className="btn-ghost"
-              onClick={() => {
-                setEditing({ title: "", type: "orders", span: 1 });
-                setManageOpen(true);
-              }}
-            >
-              + Add widget
-            </button>
+            {/* '+ Add widget' button removed per request */}
           </div>
         </div>
 
@@ -268,7 +242,7 @@ export default function Dashboard() {
                   >
                     <option value="orders">Orders Spark</option>
                     <option value="revenue">Revenue Spark</option>
-                    <option value="zones">Zone Heat (mini)</option>
+                    {/* zones widget removed */}
                   </select>
                 </label>
 
