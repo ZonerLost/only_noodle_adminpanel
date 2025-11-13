@@ -16,13 +16,13 @@ export default function Branding() {
 
   return (
     <div className="page">
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="mb-4">
           <h1 className="text-xl font-semibold">Branding</h1>
           <div className="muted text-sm">Logo, name and primary color</div>
         </div>
 
-        <form className="card p-4 space-y-3" onSubmit={save}>
+        <form className="card p-4 space-y-3 max-w-3xl" onSubmit={save}>
           <label className="block">
             <div className="muted text-sm mb-1">App name</div>
             <input
